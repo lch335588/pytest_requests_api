@@ -2,7 +2,6 @@ import requests
 from config.config import *
 import time
 import traceback
-import ast
 
 
 class Request:
@@ -14,13 +13,14 @@ class Request:
     def print_error_log(self):
         nowtime = time.strftime("%Y-%m-%d %H:%M:%S")
         f = open(self.logdir, 'a')
-        print(f'{nowtime}\n',
+        print(f'{nowtime}\n请求模块错误！',
               file=f)
         traceback.print_exc(file=f)
         f.close()
+        traceback.print_exc()
         print(f'{nowtime}\n')
 
-    def http_request(self, method, url, add_parameter_str=None):
+    def http_request(self, method, url, add_parameter_dict=None):
         parameter = {
             "params": None,
             "data": None,
@@ -37,8 +37,7 @@ class Request:
             "cert": None,
             "json": None,
         }
-        if add_parameter_str:
-            add_parameter_dict = ast.literal_eval(add_parameter_str)
+        if add_parameter_dict:
             parameter.update(add_parameter_dict)
         try:
             return requests.request(
@@ -62,7 +61,7 @@ class Request:
             self.print_error_log()
             return '{"result":"error","msg":"Please check the log for detailed errors"}'
 
-    def session_request(self, method, url, session: requests.session(), add_parameter_str=None):
+    def session_request(self, method, url, session: requests.session(), add_parameter_dict=None):
         parameter = {
             "params": None,
             "data": None,
@@ -79,8 +78,7 @@ class Request:
             "cert": None,
             "json": None,
         }
-        if add_parameter_str:
-            add_parameter_dict = ast.literal_eval(add_parameter_str)
+        if add_parameter_dict:
             parameter.update(add_parameter_dict)
         try:
             return session.request(

@@ -2,25 +2,35 @@ import pytest
 import time
 from base.custom_requests import Request
 from common import assert_requests
+from data import xlsx_data
 
 
-@pytest.mark.flaky(reruns=1, reruns_delay=2)
-class TestCSD:
+case_data = xlsx_data.XlsxData().sheet_data()
+keys = list(case_data.keys())
+print(keys)
 
-    @pytest.fixture(autouse=True)
-    def setting(self):
-        self.pass_value = {}
 
-    # @pytest.mark.parametrize('button_key', keys)
-    def test_step(self):
-        response = Request().http_request('get', 'http://www.baidu.com')
-        # response.encoding = 'utf-8'
-        print(response.status_code)
-        print(type(response.status_code))
-        assert_requests.judge(response)
+if len(keys)>=1:
+    # @pytest.mark.flaky(reruns=1, reruns_delay=2)
+    class TestAPI01:
+        def setting(self):
+            self.pass_value = {}
+
+        @pytest.mark.parametrize('api_data', case_data[keys[0]])
+        def test_1(self, api_data):
+            print(api_data['编号/名称'])
+
+if len(keys)>=1:
+    # @pytest.mark.flaky(reruns=1, reruns_delay=2)
+    class TestAPI02:
+        def setting(self):
+            self.pass_value = {}
+
+        @pytest.mark.parametrize('api_data', case_data[keys[1]])
+        def test_1(self, api_data):
+            print(api_data['编号/名称'])
 
 
 if __name__ == '__main__':
-
-    pytest.main(["-s", "test_case.py"])
+    pytest.main(["-s", "-v", "-n", "3", "--dist=loadscope", "test_case.py"])
 

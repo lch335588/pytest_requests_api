@@ -31,9 +31,10 @@ class MysqlJude:
     def mysql_log(self):
         nowtime = time.strftime("%Y-%m-%d %H:%M:%S")
         f = open(self.logdir, 'a')
-        print(f'{nowtime}\n数据库模块错误！\n', file=f)
+        print(f'{nowtime}\n数据库模块错误！', file=f)
         traceback.print_exc(file=f)
         f.close()
+        traceback.print_exc()
 
     def check_select(self, expect):
         check_res = []
