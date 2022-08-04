@@ -31,6 +31,23 @@ class XlsxData:
                 cases_data[sheet_name] = cases_step
         return cases_data
 
+    def check_session(self, sheet_name):
+        ws = self.wb['设置']
+        values = list(ws.values)
+        case_dict = {}
+        if values:
+            file = values[0]
+            for value in values[1:]:
+                case_dict = dict(zip(file, value))
+                # print(case_dict)
+        if case_dict:
+            value = ast.literal_eval(case_dict['是否为sessinon方式'])
+            try:
+                result = value[sheet_name]
+                return result
+            except:
+                return 'no'
+
 
 def add_parameter_data(step_data):
     add_parameter_dict = {}
@@ -82,4 +99,5 @@ def parametric_case(case_dict):
 
 if __name__ == '__main__':
 
-    XlsxData().sheet_data()
+    data = XlsxData().check_session('test3')
+    print(data)
