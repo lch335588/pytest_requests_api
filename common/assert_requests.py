@@ -48,12 +48,15 @@ def judge(case_data: dict, response: requests.Response = None):
 def check_jsonpath(response: requests.Response, expect_list):
     response_dict = response.json()
     check_res = []
+    print("断言中……")
     for expect in expect_list:
         actual = jsonpath.jsonpath(response_dict, expect['expr'])
         if isinstance(actual, list):
             actual = actual[0]
         if expect['type'] == 'eq':
-            check_res.append(actual == expect['expected'])
+            result_tf = actual == expect['expected']
+            print(f"提取值:{actual}   期望值:{expect['expected']}   {result_tf}")
+            check_res.append(result_tf)
 
     if check_res:
         return all(check_res)
@@ -64,13 +67,19 @@ def check_jsonpath(response: requests.Response, expect_list):
 
 def check_re(response: requests.Response, expect_list):
     response_str = response.text
+    # print(response_str)
     check_res = []
+    # print(expect_list)
+    print("断言中……")
     for expect in expect_list:
         actual = re.findall(expect['expr'], response_str)
+        # print(actual)
         if isinstance(actual, list):
             actual = actual[0]
         if expect['type'] == 'eq':
-            check_res.append(actual == expect['expected'])
+            result_tf = actual == expect['expected']
+            print(f"提取值:{actual}   期望值:{expect['expected']}   {result_tf}")
+            check_res.append(result_tf)
 
     if check_res:
         return all(check_res)

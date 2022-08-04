@@ -9,10 +9,12 @@ class XlsxData:
 
     def sheet_name_list(self):
         sheetnames_list = self.wb.sheetnames
+        new_sheet_name = []
         for name in sheetnames_list:
-            if "test" not in name:
-                sheetnames_list.remove(name)
-        return sheetnames_list
+            if "test" in name:
+                new_sheet_name.append(name)
+        # print(new_sheet_name)
+        return new_sheet_name
 
     def sheet_data(self):
         sheetnames_list = self.sheet_name_list()
@@ -99,5 +101,5 @@ def parametric_case(case_dict):
 
 if __name__ == '__main__':
 
-    data = XlsxData().check_session('test3')
+    data = XlsxData().sheet_name_list()
     print(data)

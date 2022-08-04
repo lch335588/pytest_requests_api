@@ -16,6 +16,7 @@ print(keys)
 if len(keys) >= 1:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI01:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()
@@ -30,6 +31,7 @@ if len(keys) >= 1:
 if len(keys) >= 2:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI02:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()
@@ -44,6 +46,7 @@ if len(keys) >= 2:
 if len(keys) >= 3:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI03:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()
@@ -59,6 +62,7 @@ if len(keys) >= 3:
 if len(keys) >= 4:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI04:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()
@@ -74,6 +78,7 @@ if len(keys) >= 4:
 if len(keys) >= 5:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI05:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()
@@ -89,6 +94,7 @@ if len(keys) >= 5:
 if len(keys) >= 6:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI06:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()
@@ -104,6 +110,7 @@ if len(keys) >= 6:
 if len(keys) >= 7:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI07:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()
@@ -119,6 +126,7 @@ if len(keys) >= 7:
 if len(keys) >= 8:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI08:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()
@@ -134,6 +142,7 @@ if len(keys) >= 8:
 if len(keys) >= 9:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI09:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()
@@ -149,6 +158,7 @@ if len(keys) >= 9:
 if len(keys) >= 10:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI10:
+        @pytest.fixture(autouse=True)
         def setting(self):
             self.pass_value = {}
             self.session = requests.Session()

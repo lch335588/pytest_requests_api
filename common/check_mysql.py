@@ -47,9 +47,10 @@ class MysqlJude:
                 try:
                     if actual[key] == expect_data[key]:
                         check_res.append(True)
+                        print(f"数据库{key}:{str(actual[key])}   预期{key}:{str(expect_data[key])}   True")
                     else:
                         check_res.append(False)
-                        print(f"数据库{key}:{str(actual[key])}   预期{key}:{str(expect_data[key])}")
+                        print(f"数据库{key}:{str(actual[key])}   预期{key}:{str(expect_data[key])}   False")
                 except:
                     self.mysql_log()
         elif expect['type'] == 'multiple':
@@ -64,8 +65,9 @@ class MysqlJude:
                 field_different.update(set(expect_data[key]).difference(actual_field_list))
                 if field_different:
                     check_res.append(False)
-                    print(f"{key} 差异:{field_different}")
+                    print(f"{key} 差异:{field_different}   False")
                 else:
+                    print(f"{key} 差异:{field_different}   True")
                     check_res.append(True)
 
                 # print(actual_field_list)
