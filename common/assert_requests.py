@@ -21,15 +21,17 @@ def print_error_log():
     print(f'{nowtime}\n断言错误，详情请查看日志')
 
 
-def judge(case_data: dict, response: requests.Response = None):
-    assert_content = ast.literal_eval(case_data[xls_head['assert_content']])
-    if response:
+def base_judge(response: requests.Response):
+    if response is not None:
         if type(response) is str:
             print(response)
-            return False
+            raise AssertionError(f"请求失败！\n{response}")
         elif response.status_code >= 400:
-            print(f"状态码:{response.status_code}")
-            return False
+            raise AssertionError(f"响应失败！状态码:{response.status_code}")
+
+
+def judge(case_data: dict, response: requests.Response = None):
+    assert_content = ast.literal_eval(case_data[xls_head['assert_content']])
     try:
         if case_data[xls_head['assert_mode']] == 'jsonpath':
             return check_jsonpath(response, assert_content)

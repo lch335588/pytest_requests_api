@@ -1,6 +1,10 @@
 import ast
 import openpyxl
+import requests
+
 from config.config import *
+import re
+import jsonpath
 
 
 class XlsxData:
@@ -97,6 +101,60 @@ def parametric_case(case_dict):
         return case_parametric_list
     else:
         return [case_dict]
+
+
+def pick_up_value(extract_rule, response: requests.Response):
+    extract_rule_dict = ast.literal_eval(extract_rule)
+    rule_type = extract_rule_dict['type']
+    place_keys = list(extract_rule_dict.keys())
+    value_result = {}
+
+    def re_rules(data_rules, data_str):
+        for value_name in data_rules.keys():
+            value = re.findall(data_rules[value_name], data_str)
+            if value:
+                value_result.update({value_name: value[0]})
+            else:
+                print(f"{value_name}正则无法提取出数据，请检查！")
+                value_result.update({value_name: None})
+
+    def jsonpath_rules(data_rules, data_dict):
+        for value_name in data_rules.keys():
+            value = jsonpath.jsonpath(data_dict, data_rules[value_name])
+            if value:
+                value_result.update({value_name: value[0]})
+            else:
+                print(f"{value_name}正则无法提取出数据，请检查！")
+                value_result.update({value_name: None})
+
+    if rule_type == 're':
+        if 'response_body' in place_keys:
+            re_rules(extract_rule_dict['response_body'], response.text)
+        elif 'response_headers' in place_keys:
+            re_rules(extract_rule_dict['response_headers'], str(response.headers))
+        elif 'response_url' in place_keys:
+            re_rules(extract_rule_dict['response_url'], response.url)
+        else:
+            print("正则提取暂时没有该规则提取数据！")
+    if rule_type == 'jsonpath':
+        if 'response_body' in place_keys:
+            jsonpath_rules(extract_rule_dict['response_body'], response.json())
+        if 'response_headers' in place_keys:
+            jsonpath_rules(extract_rule_dict['response_headers'], response.headers)
+        else:
+            print("jsonpath提取暂时没有该规则提取数据！")
+    # print(value_result)
+    return value_result
+
+
+def update_data(step_data, extract_values):
+    # print(extract_values)
+    step_data_str = str(step_data)
+    # print(step_data_str)
+    for value_name in extract_values:
+        step_data_str = step_data_str.replace("#{" + value_name + "}", extract_values[value_name])
+    result_dict = ast.literal_eval(step_data_str)
+    return result_dict
 
 
 if __name__ == '__main__':
