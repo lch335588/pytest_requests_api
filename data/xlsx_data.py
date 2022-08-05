@@ -116,7 +116,7 @@ def pick_up_value(extract_rule, response: requests.Response):
                 value_result.update({value_name: value[0]})
             else:
                 print(f"{value_name}正则无法提取出数据，请检查！")
-                value_result.update({value_name: None})
+                # value_result.update({value_name: None})
 
     def jsonpath_rules(data_rules, data_dict):
         for value_name in data_rules.keys():
@@ -125,7 +125,7 @@ def pick_up_value(extract_rule, response: requests.Response):
                 value_result.update({value_name: value[0]})
             else:
                 print(f"{value_name}正则无法提取出数据，请检查！")
-                value_result.update({value_name: None})
+                # value_result.update({value_name: None})
 
     if rule_type == 're':
         if 'response_body' in place_keys:
