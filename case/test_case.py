@@ -9,6 +9,7 @@ from config.config import *
 
 case_data = xlsx_data.XlsxData().sheet_data()
 keys = list(case_data.keys())
+keys_length = len(keys)
 print(keys)
 pass_value = {}
 
@@ -26,7 +27,7 @@ def business_order(api_data, key, session):
         assert result_tf
 
 
-if len(keys) >= 1:
+if keys_length >= 1:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI01:
         @classmethod
@@ -37,7 +38,7 @@ if len(keys) >= 1:
         def test_sheet(self, api_data):
             business_order(api_data, keys[0], self.session)
 
-if len(keys) >= 2:
+if keys_length >= 2:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI02:
         @classmethod
@@ -48,7 +49,7 @@ if len(keys) >= 2:
         def test_sheet(self, api_data):
             business_order(api_data, keys[1], self.session)
 
-if len(keys) >= 3:
+if keys_length >= 3:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI03:
         @classmethod
@@ -59,7 +60,7 @@ if len(keys) >= 3:
         def test_sheet(self, api_data):
             business_order(api_data, keys[2], self.session)
 
-if len(keys) >= 4:
+if keys_length >= 4:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI04:
         @classmethod
@@ -71,7 +72,7 @@ if len(keys) >= 4:
             business_order(api_data, keys[3], self.session)
 
 
-if len(keys) >= 5:
+if keys_length >= 5:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI05:
         @classmethod
@@ -83,7 +84,7 @@ if len(keys) >= 5:
             business_order(api_data, keys[4], self.session)
 
 
-if len(keys) >= 6:
+if keys_length >= 6:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI06:
         @classmethod
@@ -95,7 +96,7 @@ if len(keys) >= 6:
             business_order(api_data, keys[5], self.session)
 
 
-if len(keys) >= 7:
+if keys_length >= 7:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI07:
         @classmethod
@@ -107,7 +108,7 @@ if len(keys) >= 7:
             business_order(api_data, keys[6], self.session)
 
 
-if len(keys) >= 8:
+if keys_length >= 8:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI08:
         @classmethod
@@ -119,7 +120,7 @@ if len(keys) >= 8:
             business_order(api_data, keys[7], self.session)
 
 
-if len(keys) >= 9:
+if keys_length >= 9:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI09:
         @classmethod
@@ -131,7 +132,7 @@ if len(keys) >= 9:
             business_order(api_data, keys[8], self.session)
 
 
-if len(keys) >= 10:
+if keys_length >= 10:
     # @pytest.mark.flaky(reruns=1, reruns_delay=2)
     class TestAPI10:
         @classmethod
