@@ -31,9 +31,12 @@ class XlsxData:
                 cases_step = []
                 for value in values[1:]:
                     case_dict = dict(zip(file, value))
-                    case_dict[xls_head['added']] = add_parameter_data(case_dict)
-                    case_list = parametric_case(case_dict)
-                    cases_step = cases_step + case_list
+                    if case_dict[xls_head['no_run']]:
+                        print(case_dict[xls_head['name']] + ":不执行")
+                    else:
+                        case_dict[xls_head['added']] = add_parameter_data(case_dict)
+                        case_list = parametric_case(case_dict)
+                        cases_step = cases_step + case_list
                 cases_data[sheet_name] = cases_step
         return cases_data
 
@@ -159,5 +162,5 @@ def update_data(step_data, extract_values):
 
 if __name__ == '__main__':
 
-    data = XlsxData().sheet_name_list()
+    data = XlsxData().sheet_data()
     print(data)

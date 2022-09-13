@@ -21,5 +21,6 @@ xls_head = {"name": "编号/名称",
             "assert_mode": "断言方式",
             "assert_content": "断言内容",
             "extract": "数据提取",
-            "file": "参数化文件"
+            "file": "参数化文件",
+            "no_run": "不执行"
             }
