@@ -80,6 +80,7 @@ def parametric_case(case_dict):
         # 打开读取参数化内文件
         keys_file = open(os.path.join(project_dir, "data", parametric_file_name))
         keys = keys_file.read().splitlines()
+        keys_file.close()
         # keys = re.findall('(.*,.*)', keys)
         # print(keys)
         parametric_head = tuple(keys[0].split(','))
